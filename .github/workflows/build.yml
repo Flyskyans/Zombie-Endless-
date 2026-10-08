@@ -15,7 +15,12 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: '22'
+
+    - name: Prepare www directory
+      run: |
+        mkdir www
+        cp *.html *.png *.jpg *.mp3 www/ || true
 
     - name: Install Capacitor
       run: |
@@ -23,7 +28,7 @@ jobs:
         npm install @capacitor/core @capacitor/cli @capacitor/android
 
     - name: Init Capacitor
-      run: npx cap init "Bunker Defense" "com.bunker.defense" --web-dir=.
+      run: npx cap init "Bunker Defense" "com.bunker.defense" --web-dir=www
 
     - name: Add Android Platform
       run: npx cap add android
